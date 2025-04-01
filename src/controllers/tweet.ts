@@ -1,6 +1,19 @@
-class TweetController {
-    async getAllTweets(){
-        return [1,2,3,4,5,6,7,8,9,10]
+import TweetService from "../db/tweet";
+
+export class TweetController {
+    private service: TweetService;
+
+    constructor(service: TweetService){
+        this.service = service;
+    }
+
+    async getAll(){
+        return this.service.getAllTweets();
+    }
+
+    async getAllEven(){
+        const tweets = this.getAll();
+        return (await tweets).filter((tweet) => tweet % 2 == 0);
     }
 }
 
