@@ -1,13 +1,14 @@
 import { Request, Response, NextFunction } from "express";
+import TweetService from "../db/tweet";
 import TweetController from "../controllers/tweet";
 
-const tweetController = new TweetController;
+const controller = new TweetController(new TweetService());
 
 class TweetHttpHandler{
 
     async getTweets(request: Request, response: Response, next: NextFunction) {  
         try{
-            const tweets = await tweetController.getAllTweets();
+            const tweets = await controller.getAllEven();
             response.json(tweets);
 
         } catch (error) {
